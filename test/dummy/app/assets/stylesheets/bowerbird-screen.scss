@@ -1,12 +1,9 @@
 /*
-
-  Bowerbird v0.1.5
-  Katalyst's HTML/CSS Library - <http://github.com/katalyst/bowerbird>
-
-  Adapted from the [Blueprint CSS Framework](http://blueprintcss.org/)
-  by [Katalyst Interactive](http://katalyst.com.au/).
-
+ *= depend_on bowerbird-reset
+ *= depend_on bowerbird-def
+ *= require_self
 */
+
 
 @import "bowerbird-reset";
 @import "bowerbird-def";

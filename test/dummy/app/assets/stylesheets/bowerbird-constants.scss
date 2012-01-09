@@ -11,6 +11,8 @@ $horizontal-orientations: join($horizontal-sides, center);
 $vertical-orientations: join($vertical-sides, middle);
 $orientations: join($horizontal-orientations, $vertical-orientations);
 
+$cases: upper lower capital;
+
 /* data relations ************************************************************/
 
 $opposite-sides: (top bottom) (left right);

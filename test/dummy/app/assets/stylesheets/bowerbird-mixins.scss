@@ -1,3 +1,5 @@
+@import "bowerbird-functions";
+
 /* positioning ***************************************************************/
 
 @mixin pad( $amount, $sides:$sides, $ext:() ) {
@@ -77,10 +79,27 @@
   @include font-style(oblique) $ext;
 }
 
-@mixin font-size( $size, $ext ) {
+@mixin font-size( $size, $ext:() ) {
   font-size:$size $ext;
 }
 
-@mixin font-color( $color, $ext ) {
+@mixin font-color( $color, $ext:() ) {
   color:$color $ext;
 }
+
+@mixin text-case( $case, $ext:() ) {
+  text-transform:if( $case == capital, capitalize, $case + case ) $ext;
+}
+
+@mixin text-decoration( $decoration, $ext:() ) {
+  text-decoration:$decoration $ext;
+}
+
+@mixin text-undecorate( $ext:() ) {
+  @include text-decoration( none, $ext );
+}
+
+@mixin text-underline( $ext:() ) {
+  @include text-decoration( underline, $ext );
+}
+

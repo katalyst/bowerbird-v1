@@ -1,0 +1,23 @@
+/* positioning ***************************************************************/
+
+@mixin def-pad( $amount, $side, $ext:() ) {
+  @each $side in $sides {
+    .pad-#{ $side }-#{ u($amount) } { @include pad( $amount, $side, $ext ); }
+  }
+}
+
+@mixin def-space( $amount, $side, $ext:() ) {
+  .space-#{ $side }-#{ u($amount) } { @include space( $amount, $side, $ext ); }
+}
+
+@mixin def-backspace( $amount, $side, $ext:() ) {
+  .backspace-#{ $side }-#{ u($amount) } { @include backspace( $amount, $side, $ext ); }
+}
+
+@mixin def-push( $amount, $direction, $ext:() ) {
+  .push-#{ $side }-#{ u($amount) } { @include push( $amount, $direction, $ext ); }
+}
+
+@mixin def-pull( $amount, $direction, $ext:() ) {
+  .pull-#{ $side }-#{ u($amount) } { @include pull( $amount, $direction, $ext ); }
+}

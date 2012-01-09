@@ -1,0 +1,86 @@
+/* positioning ***************************************************************/
+
+@mixin pad( $amount, $sides:$sides, $ext:() ) {
+  @each $side in $sides {
+    padding-#{ $side }:$amount $ext;
+  }
+}
+
+@mixin space( $amount, $sides:$sides, $ext:() ) {
+  @each $side in $sides {
+    margin-#{ $side }:$amount $ext;
+  }
+}
+
+@mixin backspace( $amount, $sides:$sides, $ext:() ) {
+  @each $side in $sides {
+    margin-#{ $side }:-$amount $ext;
+  }
+}
+
+@mixin push( $amount, $directions:$directions, $ext:() ) {
+  @each $direction in $directions {
+    #{ side-in-opposite-direction($direction) }:$amount $ext; position:relative;
+  }
+}
+
+@mixin pull( $amount, $directions:$directions, $ext:() ) {
+  @each $direction in $directions {
+    #{ side-in-direction($direction) }:-$amount $ext; position:relative;
+  }
+}
+
+@mixin sink( $amount, $sides:top left right bottom, $ext:() ) {
+  @each $side in $sides {
+    $side:$amount $ext; position:absolute;
+  }
+}
+
+@mixin float( $sides:left right, $ext:() ) {
+  @each $side in $sides {
+    float:$side $ext;
+  }
+}
+
+@mixin align( $orientations, $ext:() ) {
+  @each $orientation in $orientations {
+    @if is-horizontal-orientation( $orientation ) {
+      text-align:$orientation $ext;
+    } else {
+      vertical-align:$orientation $ext;
+    }
+  }
+}
+/* type **********************************************************************/
+
+@mixin font-weight( $amount:bold, $ext:() ) {
+  font-weight:$amount $ext;
+}
+
+@mixin font-regular( $ext:() ) {
+  @include font-weight(normal, $ext);
+}
+
+@mixin font-bold( $ext:() ) {
+  @include font-weight(bold, $ext);
+}
+
+@mixin font-style( $style, $ext:() ) {
+  font-style:$style $ext;
+}
+
+@mixin font-italic( $ext:() ) {
+  @include font-style(italic) $ext;
+}
+
+@mixin font-oblique( $ext:() ) {
+  @include font-style(oblique) $ext;
+}
+
+@mixin font-size( $size, $ext ) {
+  font-size:$size $ext;
+}
+
+@mixin font-color( $color, $ext ) {
+  color:$color $ext;
+}

@@ -12,6 +12,11 @@
   @return not is-blank( $value );
 }
 
+@function is-zero( $value ) {
+  @if is-list( $value ) { @return length( $value ) == 0; }
+  @return remove-unit( $value ) == 0;
+}
+
 @function is-number( $value ) {
   @return type-of( $value ) == number
 }
@@ -52,42 +57,42 @@
   @return is-value( find($sides, $side) );
 }
 
-@function is-horizontal-orientation( $orientation ) {
-  @return is-value( find($horizontal-orientations, $orientation) );
+@function is-horizontal-alignment( $alignment ) {
+  @return is-value( find($horizontal-alignments, $alignment) );
 }
 
-@function is-vertical-orientation( $orientation ) {
-  @return is-value( find($vertical-orientations, $orientation) );
+@function is-vertical-alignment( $alignment ) {
+  @return is-value( find($vertical-alignments, $alignment) );
 }
 
-@function is-orientation( $orientation ) {
-  @return is-value( find($orientations, $orientation) );
+@function is-alignment( $alignment ) {
+  @return is-value( find($alignments, $alignment) );
 }
 
 /* find *******************************************************************/
 
 @function opposite-side( $side ) {
-  find-opposite( $opposite-sides, $side );
+  @return find-opposite( $opposite-sides, $side );
 }
 
 @function opposite-corner( $corner ) {
-  find-opposite( $opposite-corners, $corner );
+  @return find-opposite( $opposite-corners, $corner );
 }
 
 @function opposite-direction( $direction ) {
-  find-opposite( $opposite-direction, $direction );
+  @return find-opposite( $opposite-direction, $direction );
 }
 
 @function side-in-direction( $direction ) {
-  find-first-by-second( $side-directions, $direction );
+  @return find-first-by-second( $side-directions, $direction );
 }
 
 @function side-in-opposite-direction( $direction ) {
-  side-in-direction( opposite-direction($direction) );
+  @return side-in-direction( opposite-direction($direction) );
 }
 
 @function moz-corner( $corner ) {
-  find-second-by-first( $moz-corners, $corner );
+  @return find-second-by-first( $moz-corners, $corner );
 }
 
 /* lists *********************************************************************/
@@ -215,6 +220,7 @@
 
 /* `format-amount` returns the `$amount` formatted as text, with the unit as decimal point */
 @function format-amount( $amount ) {
+  @if not is-number( $amount ) { @return $amount; }
   $amount: formattable-amount( $amount );
   $unit: format-unit( $amount );
   $left: floor( remove-unit($amount) );

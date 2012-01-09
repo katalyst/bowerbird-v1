@@ -7,9 +7,9 @@ $horizontal-sides: left right;
 $vertical-sides: top bottom;
 $sides: join($horizontal-sides, $vertical-sides);
 
-$horizontal-orientations: join($horizontal-sides, center);
-$vertical-orientations: join($vertical-sides, middle);
-$orientations: join($horizontal-orientations, $vertical-orientations);
+$horizontal-alignments: join($horizontal-sides, (center));
+$vertical-alignments: join($vertical-sides, (middle));
+$alignments: join($horizontal-alignments, $vertical-alignments);
 
 $cases: upper lower capital;
 

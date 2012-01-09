@@ -1,5 +1,57 @@
 @import "bowerbird-functions";
 
+/* utilities *****************************************************************/
+
+@mixin clear-fix {
+  :after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
+  display:block !important;
+}
+
+/* flow **********************************************************************/
+
+@mixin display-block( $ext:() ) {
+  display:block $ext;
+}
+
+@mixin display-inline( $ext:() ) {
+  display:inline $ext;
+}
+
+@mixin display-inline-block( $ext:() ) {
+  display:-moz-inline-stack $ext; display:inline-block $ext; vertical-align:top $ext; zoom:1 $ext; *display:inline $ext;
+}
+
+@mixin border-box( $ext:() ) {
+  box-sizing:border-box $ext; -ms-box-sizing:border-box $ext; -moz-box-sizing:border-box $ext; -khtml-box-sizing:border-box $ext; -webkit-box-sizing:border-box $ext;
+}
+
+@mixin content-box( $ext:() ) {
+  box-sizing:content-box $ext; -ms-box-sizing:content-box $ext; -moz-box-sizing:content-box $ext; -khtml-box-sizing:content-box $ext; -webkit-box-sizing:content-box $ext;
+}
+
+/* shape *********************************************************************/
+
+@mixin width( $amount, $ext:() ) {
+  width:$amount $ext;
+}
+
+@mixin height( $amount, $ext:() ) {
+  height:$amount $ext;
+}
+
+@mixin box-width( $amount, $ext:() ) {
+  @include border-box( $suffix ); width:$amount $ext;
+}
+
+@mixin box-height( $amount, $ext:() ) {
+  @include border-box( $suffix ); height:$amount $ext;
+}
+
+@mixin box-fill( $ext:() ) {
+  @include box-width( 100%, $suffix ); @include box-height( 100%, $suffix );
+}
+
+
 /* positioning ***************************************************************/
 
 @mixin pad( $amount, $sides:$sides, $ext:() ) {
@@ -44,16 +96,19 @@
   }
 }
 
-@mixin align( $orientations, $ext:() ) {
-  @each $orientation in $orientations {
-    @if is-horizontal-orientation( $orientation ) {
-      text-align:$orientation $ext;
-    } else {
-      vertical-align:$orientation $ext;
-    }
+@mixin align( $alignment, $ext:() ) {
+  @if is-horizontal-alignment( $alignment ) {
+    text-align:$alignment $ext;
+  } else {
+    vertical-align:$alignment $ext;
   }
 }
+
 /* type **********************************************************************/
+
+@mixin font-inherit( $ext:() ) {
+  color:inherit $ext; font-size:inherit $ext; font-weight:inherit $ext; text-decoration:none $ext; text-transform:inherit $ext;
+}
 
 @mixin font-weight( $amount:bold, $ext:() ) {
   font-weight:$amount $ext;
@@ -72,11 +127,11 @@
 }
 
 @mixin font-italic( $ext:() ) {
-  @include font-style(italic) $ext;
+  @include font-style(italic, $ext);
 }
 
 @mixin font-oblique( $ext:() ) {
-  @include font-style(oblique) $ext;
+  @include font-style(oblique, $ext);
 }
 
 @mixin font-size( $size, $ext:() ) {
@@ -89,6 +144,18 @@
 
 @mixin text-case( $case, $ext:() ) {
   text-transform:if( $case == capital, capitalize, $case + case ) $ext;
+}
+
+@mixin text-uppercase( $ext:() ) {
+  @include text-case(upper, $ext);
+}
+
+@mixin text-lowercase( $ext:() ) {
+  @include text-case(lower, $ext);
+}
+
+@mixin text-capitalize( $ext:() ) {
+  @include text-case(capital, $ext);
 }
 
 @mixin text-decoration( $decoration, $ext:() ) {

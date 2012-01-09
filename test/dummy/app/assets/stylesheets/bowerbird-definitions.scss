@@ -1,5 +1,55 @@
 @import "bowerbird-mixins";
 
+/* utilities *****************************************************************/
+
+@mixin def-clear-fix {
+  .clear-fix { @include clear-fix; }
+}
+
+/* flow **********************************************************************/
+
+@mixin def-display-block( $ext:() ) {
+  .display-block { @include display-block($ext); }
+}
+
+@mixin def-display-inline( $ext:() ) {
+  .display-inline { @include display-inline($ext); }
+}
+
+@mixin def-display-inline-block( $ext:() ) {
+  .display-inline-block { @include display-inline-block($ext); }
+}
+
+@mixin def-border-box( $ext:() ) {
+  .border-box { @include border-box($ext); }
+}
+
+@mixin def-content-box( $ext:() ) {
+  .content-box { @include content-box($ext); }
+}
+
+/* shape *********************************************************************/
+
+@mixin def-width( $amount, $ext:() ) {
+  .width-#{ u($amount) } { @include width($amount, $ext); }
+}
+
+@mixin def-height( $amount, $ext:() ) {
+  .height-#{ u($amount) } { @include height($amount, $ext); }
+}
+
+@mixin def-box-width( $amount, $ext:() ) {
+  .box-width-#{ u($amount) } { @include box-width($amount, $ext); }
+}
+
+@mixin def-box-height( $amount, $ext:() ) {
+  .box-height-#{ u($amount) } { @include box-height($amount, $ext); }
+}
+
+@mixin def-box-fill( $ext:() ) {
+  .box-fill { @include box-fill($ext); }
+}
+
 /* positioning ***************************************************************/
 
 @mixin def-pad( $amount, $side, $ext:() ) {
@@ -17,9 +67,92 @@
 }
 
 @mixin def-push( $amount, $direction, $ext:() ) {
-  .push-#{ $side }-#{ u($amount) } { @include push( $amount, $direction, $ext ); }
+  .push-#{ $direction }-#{ u($amount) } { @include push( $amount, $direction, $ext ); }
 }
 
 @mixin def-pull( $amount, $direction, $ext:() ) {
-  .pull-#{ $side }-#{ u($amount) } { @include pull( $amount, $direction, $ext ); }
+  .pull-#{ $direction }-#{ u($amount) } { @include pull( $amount, $direction, $ext ); }
 }
+
+@mixin def-sink( $amount, $side, $ext:() ) {
+  @if is-zero( $amount ) {
+    .sink-#{ $side } { @include sink( $amount, $side, $ext ); }
+  } else {
+    .sink-#{ $side }-#{ u($amount) } { @include sink( $amount, $direction, $ext ); }
+  }
+}
+
+@mixin def-float( $side, $ext:() ) {
+  .float-#{ $direction } { @include float( $amount, $ext ); }
+}
+
+@mixin def-align( $alignment, $ext:() ) {
+  .align-#{ $alignment } { @include align( $alignment, $ext ); }
+}
+
+/* type **********************************************************************/
+
+@mixin def-font-inherit( $ext:() ) {
+  .font-inherit { @include font-inherit($ext); }
+}
+
+@mixin def-font-weight( $amount:bold, $ext:() ) {
+  .font-weight-#{ u($amount) } { @include font-weight($amount, $ext); }
+}
+
+@mixin def-font-regular( $ext:() ) {
+  .font-regular { @include font-regular($ext); }
+}
+
+@mixin def-font-bold( $ext:() ) {
+  .font-bold { @include font-bold($ext); }
+}
+
+@mixin def-font-style( $style, $ext:() ) {
+  .font-style-#{ u($style) } { @include font-style($style, $ext); }
+}
+
+@mixin def-font-italic( $ext:() ) {
+  .font-italic { @include font-italic($ext); }
+}
+
+@mixin def-font-oblique( $ext:() ) {
+  .font-oblique-#{ u($amount) } { @include font-oblique($ext); }
+}
+
+@mixin def-font-size( $size, $ext:() ) {
+  .font-size-#{ u($size) } { @include font-size($size, $ext); }
+}
+
+@mixin def-font-color( $color, $ext:() ) {
+  .font-color-#{ u($color) } { @include font-color($color, $ext); }
+}
+
+@mixin def-text-case( $case, $ext:() ) {
+  .text-case-#{ u($case) } { @include text-case($case, $ext); }
+}
+
+@mixin def-uppercase( $ext:() ) {
+  .text-uppercase { @include text-uppercase($ext); }
+}
+
+@mixin def-lowercase( $ext:() ) {
+  .text-lowercase { @include text-lowercase($ext); }
+}
+
+@mixin def-capitalize( $ext:() ) {
+  .text-capitalize { @include text-capitalize($ext); }
+}
+
+@mixin def-text-decoration( $decoration, $ext:() ) {
+  .text-decoration-#{ u($decoration) } { @include text-decoration($decoration, $ext); }
+}
+
+@mixin def-text-undecorated( $ext:() ) {
+  .text-undecorated { @include text-undecorated($ext); }
+}
+
+@mixin def-text-underlined( $ext:() ) {
+  .text-underlined { @include text-underlined($ext); }
+}
+

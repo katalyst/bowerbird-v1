@@ -15,3 +15,7 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :assets do
+  gem 'sass-rails'              , '~> 3.1.2'
+end

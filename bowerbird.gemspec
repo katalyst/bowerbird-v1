@@ -7,9 +7,9 @@ require "bowerbird/version"
 Gem::Specification.new do |s|
   s.name        = "bowerbird"
   s.version     = Bowerbird::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
+  s.authors     = ["Haydn Ewers"]
+  s.email       = ["haydn@katalyst.com.au"]
+  s.homepage    = "http://github.com/katalyst/bowerbird"
   s.summary     = "TODO: Summary of Bowerbird."
   s.description = "TODO: Description of Bowerbird."
 

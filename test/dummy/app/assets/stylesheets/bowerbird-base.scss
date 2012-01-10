@@ -66,6 +66,12 @@
 // ### Grid Container
 //
 // `container`
+//
+// Wrapper for a grid:
+//
+//     <body>
+//      <div class="container width-95u">...</div>
+//     </body>
 
 .container {
   @extend .clear-fix;
@@ -73,109 +79,192 @@
   margin: 0 auto;
 }
 
-// ## Width, Height and Line-Height
+// ## Width
 //
-// ### 0em1 Increments
+// ### Relative Size Increments
 //
-// Width: `width-1em`, `width-1em1` ... `width-2em`
-//
-// Height: `height-1em`, `height-1em1` ... `height-2em`
-//
-// Line height: `line-height-1em`, `line-height-1em1` ... `line-height-2em`
+// `width-1ex`, `width-1ex1` ... `width-2ex`
 
 @for $i from 10 through 20 {
   $ex: $i * 0.1ex;
-  $em: $i * 0.1em;
-
   @include def-width( $ex );
-  @include def-height( $em );
-  @include def-line-height( $em );
 }
 
-// ### 0u1 (1px) Increments
+// ### Small Increments
 //
-// Width: `width-0`, `width-0u1` ... `width-2u`
-//
-// Box width: `box-width-0`, `box-width-0u1` ... `box-width-2u`
-//
-// Height: `height-0`, `height-0u1` ... `height-2u`
-//
-// Box height: `box-height-0`, `box-height-0u1` ... `box-height-2u`
-//
-// Line height: `line-height-0`, `line-height-0u1` ... `line-height-2u`
+// `width-0`, `width-0u1` ... `width-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
-
   @include def-width( $px );
-  @include def-box-width( $px );
-
-  @include def-height( $px );
-  @include def-box-height( $px );
-  @include def-line-height( $px );
 }
 
-// ### 0u5 (5px) Increments
+// ### Medium Increments
 //
-// Width: `width-0`, `width-0u5` ... `width-10u`
-//
-// Box width: `box-width-0`, `box-width-0u5` ... `box-width-10u`
-//
-// Height: `height-0`, `height-0u5` ... `height-10u`
-//
-// Box height: `box-height-0`, `box-height-0u5` ... `box-height-10u`
+// `width-0`, `width-0u5` ... `width-10u`
 
 @for $i from 0 through 20 {
   $px: $i * 5px;
-
   @include def-width( $px );
-  @include def-box-width( $px );
-
-  @include def-height( $px );
-  @include def-box-height( $px );
 }
+
+// ### Large Increments
+
+/* TODO */
 
 // ### Column Increments
 //
-// Unit width: `width-0u3`, `width-0u7` ... `width-9u5`
+// Units: `width-0u3`, `width-0u7` ... `width-9u5`
 //
-// Box width: `box-width-0u3`, `box-width-0u7` ... `box-width-9u5`
-//
-// Column width: `width-1col`, `width-2col` ... `width-24col`
-//
-// Column box width: `box-width-1col`, `box-width-2col` ... `box-width-24col`
+// Columns: `width-1col`, `width-2col` ... `width-24col`
 
 @for $i from 1 through 24 {
   $px: $i * 40px - 10;
   $col: $i * 1col;
 
   @include def-width( $px );
-  @include def-box-width( $px );
 
   .width-#{ f($col) } { @extend .width-#{ f($px) }; }
-  .box-width-#{ f($col) } { @extend .box-width-#{ f($px) }; }
 }
 
 // ### Misc
-
-// Fill: `box-fill`
-
-@include def-box-fill;
-
-// Auto: `height-auto`, `width-auto`
-
-.height-auto { @include height(auto); }
-.width-auto { @include width(auto); }
-
-// Width fractions: `width-full`, `width-half`, `width-third`, `width-third-2`,
+//
+// `width-auto`, `width-full`, `width-half`, `width-third`, `width-third-2`,
 // `width-quarter`, `width-quarter-3`
 
+.width-auto { @include width(auto); }
 .width-full { @include box-width(100%); }
 .width-half { @include box-width(50%); }
 .width-third { @include box-width(33.33%); }
 .width-third-2 { @include box-width(66.66%); }
 .width-quarter { @include box-width(25%); }
 .width-quarter-3 { @include box-width(75%); }
+
+// ## Box Width
+//
+// ### Small Increments
+//
+// `box-width-0`, `box-width-0u1` ... `box-width-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-box-width( $px );
+}
+
+// ### Medium Increments
+//
+// `box-width-0`, `box-width-0u5` ... `box-width-10u`
+
+@for $i from 0 through 20 {
+  $px: $i * 5px;
+  @include def-box-width( $px );
+}
+
+// ### Large Increments
+
+/* TODO */
+
+// ### Column Increments
+//
+// `box-width-1col`, `box-width-2col` ... `box-width-24col`
+
+@for $i from 1 through 24 {
+  $px: $i * 40px - 10;
+  $col: $i * 1col;
+
+  @include def-box-width( $px );
+
+  .box-width-#{ f($col) } { @extend .box-width-#{ f($px) }; }
+}
+
+// ## Height
+//
+// ### Relative Size Increments
+//
+// `height-1em`, `height-1em1` ... `height-2em`
+
+@for $i from 10 through 20 {
+  $em: $i * 0.1em;
+  @include def-height( $em );
+}
+
+// ### Small Increments
+//
+// `height-0`, `height-0u1` ... `height-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-height( $px );
+}
+
+// ### Medium Increments
+//
+// `height-0`, `height-0u5` ... `height-10u`
+
+@for $i from 0 through 20 {
+  $px: $i * 5px;
+  @include def-height( $px );
+}
+
+// ### Large Increments
+
+/* TODO */
+
+// ### Misc
+//
+// `height-auto`
+
+.height-auto { @include height(auto); }
+
+// ## Box Height
+//
+// ### Small Increments
+//
+// `box-height-0`, `box-height-0u1` ... `box-height-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-box-height( $px );
+}
+
+// ### Medium Increments
+//
+// `box-height-0`, `box-height-0u5` ... `box-height-10u`
+
+@for $i from 0 through 20 {
+  $px: $i * 5px;
+  @include def-box-height( $px );
+}
+
+// ### Large Increments
+
+/* TODO */
+
+// ## Line Height
+//
+// ### Relative Size Increments
+//
+// `line-height-1em`, `line-height-1em1` ... `line-height-2em`
+
+@for $i from 10 through 20 {
+  $em: $i * 0.1em;
+  @include def-line-height( $em );
+}
+
+// ### Small Increments
+//
+// `line-height-0`, `line-height-0u1` ... `line-height-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-line-height( $px );
+}
+
+// ### Width and Height
+
+// Fill: `box-fill`
+
+@include def-box-fill;
 
 // ## Position
 //

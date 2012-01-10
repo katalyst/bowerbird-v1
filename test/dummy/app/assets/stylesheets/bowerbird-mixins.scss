@@ -106,7 +106,7 @@
 
 @mixin sink( $amount, $sides:top left right bottom, $ext:() ) {
   @each $side in $sides {
-    $side:$amount $ext; position:absolute;
+    #{ $side }:$amount $ext; position:absolute;
   }
 }
 

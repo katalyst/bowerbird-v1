@@ -1,9 +1,8 @@
 /*
+ *= depend_on bowerbird-base
  *= depend_on bowerbird-reset
- *= depend_on bowerbird-def
  *= require_self
 */
 
-
+@import "bowerbird-base";
 @import "bowerbird-reset";
-@import "bowerbird-def";

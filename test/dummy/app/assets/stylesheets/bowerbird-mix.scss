@@ -1,7 +1,0 @@
-@mixin def-pad($size, $side) {
-   .pad-#{$side}-#{$size} { padding-#{$side}: $size; }
-}
-
-@mixin def-space($size, $side) {
-   .space-#{$side}-#{$size} { margin-#{$side}: $size; }
-}

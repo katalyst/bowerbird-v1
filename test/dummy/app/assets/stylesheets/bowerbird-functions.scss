@@ -1,0 +1,235 @@
+@import "bowerbird-constants";
+
+/* predicates ****************************************************************/
+
+/* `is-blank` returns `true` if the `$value` is `""`, `false` otherise */
+@function is-blank( $value ) {
+  @return $value == "";
+}
+
+/* `is-value` returns `true` if the `$value` is not blank, `false` otherise */
+@function is-value( $value ) {
+  @return not is-blank( $value );
+}
+
+@function is-zero( $value ) {
+  @if is-list( $value ) { @return length( $value ) == 0; }
+  @return remove-unit( $value ) == 0;
+}
+
+@function is-number( $value ) {
+  @return type-of( $value ) == number
+}
+
+@function is-string( $value ) {
+  @return type-of( $value ) == string
+}
+
+@function is-color( $value ) {
+  @return type-of( $value ) == color
+}
+
+@function is-boolean( $value ) {
+  @return type-of( $value ) == bool
+}
+
+@function is-list( $value ) {
+  @return type-of( $value ) == list
+}
+
+@function is-corner( $corner ) {
+  @return is-value( find($corners, $corner) );
+}
+
+@function is-direction( $direction ) {
+  @return is-value( find($directions, $direction) );
+}
+
+@function is-horizontal-side( $side ) {
+  @return is-value( find($horizontal-sides, $side) );
+}
+
+@function is-vertical-side( $side ) {
+  @return is-value( find($vertical-sides, $side) );
+}
+
+@function is-side( $side ) {
+  @return is-value( find($sides, $side) );
+}
+
+@function is-horizontal-alignment( $alignment ) {
+  @return is-value( find($horizontal-alignments, $alignment) );
+}
+
+@function is-vertical-alignment( $alignment ) {
+  @return is-value( find($vertical-alignments, $alignment) );
+}
+
+@function is-alignment( $alignment ) {
+  @return is-value( find($alignments, $alignment) );
+}
+
+/* find *******************************************************************/
+
+@function opposite-side( $side ) {
+  @return find-opposite( $opposite-sides, $side );
+}
+
+@function opposite-corner( $corner ) {
+  @return find-opposite( $opposite-corners, $corner );
+}
+
+@function opposite-direction( $direction ) {
+  @return find-opposite( $opposite-direction, $direction );
+}
+
+@function side-in-direction( $direction ) {
+  @return find-first-by-second( $side-directions, $direction );
+}
+
+@function side-in-opposite-direction( $direction ) {
+  @return side-in-direction( opposite-direction($direction) );
+}
+
+@function moz-corner( $corner ) {
+  @return find-second-by-first( $moz-corners, $corner );
+}
+
+/* lists *********************************************************************/
+
+@function first( $list ) {
+  @return nth( $list, 1 );
+}
+
+@function second( $list ) {
+  @return nth( $list, 2 );
+}
+
+@function maybe-nth( $list, $i ) {
+  @return find-value( nth($list, $i) "" );
+}
+
+@function maybe-first( $list ) {
+  @return maybe-nth( $list, 1 );
+}
+
+@function maybe-second( $list ) {
+  @return maybe-nth( $list, 2 );
+}
+
+@function sum( $list, $separator:zero(first($list)), $result:zero(first($list)), $i:1 ) {
+  @if $i > length($list) {
+    $result: plus( plus($result, $separator), nth($list, $i) );
+    @return sum( $list, $separator, $result, $i + 1 );
+  }
+  @return $result;
+}
+
+@function find-by-nth( $lists, $value, $i:1 ) {
+  @each $list in $lists {
+    @if $value == nth($list, $i) { @return $list; }
+  }
+  @return "";
+}
+
+@function find-by-first( $pairs, $first ) {
+  @return find-by-nth( $pairs, $first, 1 );
+}
+
+@function find-by-second( $pairs, $second ) {
+  @return find-by-nth( $pairs, $second, 2 );
+}
+
+@function find-second-by-first( $pairs, $first ) {
+  @return maybe-second( find-by-first($pairs, $first) );
+}
+
+@function find-first-by-second( $pairs, $second ) {
+  @return maybe-first( find-by-first($pairs, $first) );
+}
+
+@function find-opposite( $pairs, $first-or-second ) {
+  @return find-value(
+    find-second-by-first($pairs, $first-or-second)
+    find-first-by-second($pairs, $first-or-second)
+  )
+}
+
+@function find-value( $possibilities ) {
+  @each $possibility in $possibilities {
+    @if is-value($possibility) { @return $possibility; }
+    @return "";
+  }
+}
+
+/* numerics ******************************************************************/
+
+/* `plus` returns `$x` added or concatenated to `$y` */
+@function plus( $x, $y ) {
+  @if is-list( $amount ) { @return join( $x, $y ); }
+  @return $x + $y;
+}
+
+/* `zero` returns 0 of the same type as `$amount` */
+@function zero( $amount ) {
+  @if is-number( $amount ) { @return $amount * 0; }
+  @if is-string( $amount ) { @return ""; }
+  @if is-list( $amount ) { @return (); }
+}
+
+/* `n` returns `$n` of the same type as `$amount` */
+@function n( $amount, $n ) {
+  @return zero($amount) + $n;
+}
+
+/* `one` returns 1 of the same type as `$amount` */
+@function one( $amount ) {
+  @return n($amount, 1);
+}
+
+/* `decimals` returns the digits after the decimal */
+@function decimals( $amount ) {
+  @return $amount - floor($amount);
+}
+
+/* `decimal` returns the digit after the decimal */
+@function decimal( $amount ) {
+  @return round( decimals($amount) * 10 );
+}
+
+/* strings *******************************************************************/
+
+/* `remove-unit` returns the `$amount` without units */
+@function remove-unit( $amount ) {
+  @return $amount / one($amount);
+}
+
+/* `format-unit` returns the formatted unit of `$amount` */
+@function format-unit( $amount ) {
+  $unit: unit( $amount );
+  @if $unit == "%" { @return pc; }
+  @if $unit == px { @return u; }
+  @return $unit;
+}
+
+/* `formattable-amount` returns the `$amount` used for formatting */
+@function formattable-amount( $amount ) {
+  @if unit( $amount ) == px { @return $amount / 10; }
+  @return $amount;
+}
+
+/* `format-amount` returns the `$amount` formatted as text, with the unit as decimal point */
+@function format-amount( $amount ) {
+  @if not is-number( $amount ) { @return $amount; }
+  $amount: formattable-amount( $amount );
+  $unit: format-unit( $amount );
+  $left: floor( remove-unit($amount) );
+  $right: round( remove-unit( decimal($amount) ));
+  @if $right > 0 { @return #{ $left }#{ $unit }#{ $right } }
+  @return #{ $left }#{ $unit };
+}
+
+/* `u` is an alias for `format-amount` */
+
+@function u( $amount ) { @return format-amount($amount) }
+

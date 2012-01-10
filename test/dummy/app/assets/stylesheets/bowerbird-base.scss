@@ -1,3 +1,6 @@
+@import "bowerbird-constants";
+@import "bowerbird-functions";
+@import "bowerbird-mixins";
 @import "bowerbird-definitions";
 
 /* utilities *****************************************************************/
@@ -93,9 +96,9 @@
     @include def-pull( $px, $direction );
   }
 
-  @each $key in pad space {
-    @include def-buffer-sides( $px );
-    @include def-buffer-box( $px );
+  @each $key in pad, space {
+    @include def-buffer-sides( $key, $px );
+    @include def-buffer-box( $key, $px );
   }
 }
 
@@ -115,7 +118,7 @@
   }
 }
 
-@for $i from 1 through 24 { /* 3u 7u 11u ... */
+@for $i from 1 through 24 { /* 4u 8u 12u ... */
   $px: $i * 40px;
 
   @each $side in $sides {
@@ -131,8 +134,6 @@
 @each $alignment in $alignments {
   @include def-align( $alignment );
 }
-
-@include def-space-center;
 
 /* type **********************************************************************/
 

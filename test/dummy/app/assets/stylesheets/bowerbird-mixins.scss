@@ -1,3 +1,4 @@
+@import "bowerbird-constants";
 @import "bowerbird-functions";
 
 /* utilities *****************************************************************/
@@ -185,11 +186,11 @@
   text-decoration:$decoration $ext;
 }
 
-@mixin text-undecorate( $ext:() ) {
+@mixin text-undecorated( $ext:() ) {
   @include text-decoration( none, $ext );
 }
 
-@mixin text-underline( $ext:() ) {
+@mixin text-underlined( $ext:() ) {
   @include text-decoration( underline, $ext );
 }
 

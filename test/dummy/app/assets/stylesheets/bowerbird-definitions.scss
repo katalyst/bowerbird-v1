@@ -1,3 +1,5 @@
+@import "bowerbird-constants";
+@import "bowerbird-functions";
 @import "bowerbird-mixins";
 
 /* utilities *****************************************************************/
@@ -93,13 +95,13 @@
 @mixin def-sink( $amount, $side, $ext:() ) {
   @if is-zero( $amount ) {
     .sink-#{ $side } { @include sink( $amount, $side, $ext ); }
-  } else {
+  } @else {
     .sink-#{ $side }-#{ u($amount) } { @include sink( $amount, $side, $ext ); }
   }
 }
 
 @mixin def-float( $side, $ext:() ) {
-  .float-#{ $direction } { @include float( $amount, $ext ); }
+  .float-#{ $side } { @include float( $ext ); }
 }
 
 @mixin def-align( $alignment, $ext:() ) {
@@ -141,7 +143,7 @@
 }
 
 @mixin def-font-oblique( $ext:() ) {
-  .font-oblique-#{ u($amount) } { @include font-oblique($ext); }
+  .font-oblique { @include font-oblique($ext); }
 }
 
 @mixin def-font-size( $size, $ext:() ) {
@@ -156,15 +158,15 @@
   .text-case-#{ u($case) } { @include text-case($case, $ext); }
 }
 
-@mixin def-uppercase( $ext:() ) {
+@mixin def-text-uppercase( $ext:() ) {
   .text-uppercase { @include text-uppercase($ext); }
 }
 
-@mixin def-lowercase( $ext:() ) {
+@mixin def-text-lowercase( $ext:() ) {
   .text-lowercase { @include text-lowercase($ext); }
 }
 
-@mixin def-capitalize( $ext:() ) {
+@mixin def-text-capitalize( $ext:() ) {
   .text-capitalize { @include text-capitalize($ext); }
 }
 

@@ -106,7 +106,8 @@
 }
 
 @function maybe-nth( $list, $i ) {
-  @return find-value( nth($list, $i) "" );
+  @if is-list($list) { @return find-value( nth($list, $i) ); }
+  @return ""
 }
 
 @function maybe-first( $list ) {
@@ -221,6 +222,7 @@
 /* `format-amount` returns the `$amount` formatted as text, with the unit as decimal point */
 @function format-amount( $amount ) {
   @if not is-number( $amount ) { @return $amount; }
+  @if is-zero( $amount ) { @return 0; }
   $amount: formattable-amount( $amount );
   $unit: format-unit( $amount );
   $left: floor( remove-unit($amount) );

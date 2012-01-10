@@ -45,19 +45,19 @@
 /* shape *********************************************************************/
 
 @mixin def-width( $amount, $ext:() ) {
-  .width-#{ u($amount) } { @include width($amount, $ext); }
+  .width-#{ f($amount) } { @include width($amount, $ext); }
 }
 
 @mixin def-height( $amount, $ext:() ) {
-  .height-#{ u($amount) } { @include height($amount, $ext); }
+  .height-#{ f($amount) } { @include height($amount, $ext); }
 }
 
 @mixin def-box-width( $amount, $ext:() ) {
-  .box-width-#{ u($amount) } { @include box-width($amount, $ext); }
+  .box-width-#{ f($amount) } { @include box-width($amount, $ext); }
 }
 
 @mixin def-box-height( $amount, $ext:() ) {
-  .box-height-#{ u($amount) } { @include box-height($amount, $ext); }
+  .box-height-#{ f($amount) } { @include box-height($amount, $ext); }
 }
 
 @mixin def-box-fill( $ext:() ) {
@@ -65,38 +65,38 @@
 }
 
 @mixin def-line-height( $amount, $ext:() ) {
-  .line-height-#{ u($amount) } { @include line-height($amount, $ext); }
+  .line-height-#{ f($amount) } { @include line-height($amount, $ext); }
 }
 
 /* position ******************************************************************/
 
 @mixin def-pad( $amount, $side, $ext:() ) {
   @each $side in $sides {
-    .pad-#{ $side }-#{ u($amount) } { @include pad( $amount, $side, $ext ); }
+    .pad-#{ $side }-#{ f($amount) } { @include pad( $amount, $side, $ext ); }
   }
 }
 
 @mixin def-space( $amount, $side, $ext:() ) {
-  .space-#{ $side }-#{ u($amount) } { @include space( $amount, $side, $ext ); }
+  .space-#{ $side }-#{ f($amount) } { @include space( $amount, $side, $ext ); }
 }
 
 @mixin def-backspace( $amount, $side, $ext:() ) {
-  .backspace-#{ $side }-#{ u($amount) } { @include backspace( $amount, $side, $ext ); }
+  .backspace-#{ $side }-#{ f($amount) } { @include backspace( $amount, $side, $ext ); }
 }
 
 @mixin def-push( $amount, $direction, $ext:() ) {
-  .push-#{ $direction }-#{ u($amount) } { @include push( $amount, $direction, $ext ); }
+  .push-#{ $direction }-#{ f($amount) } { @include push( $amount, $direction, $ext ); }
 }
 
 @mixin def-pull( $amount, $direction, $ext:() ) {
-  .pull-#{ $direction }-#{ u($amount) } { @include pull( $amount, $direction, $ext ); }
+  .pull-#{ $direction }-#{ f($amount) } { @include pull( $amount, $direction, $ext ); }
 }
 
 @mixin def-sink( $amount, $side, $ext:() ) {
   @if is-zero( $amount ) {
     .sink-#{ $side } { @include sink( $amount, $side, $ext ); }
   } @else {
-    .sink-#{ $side }-#{ u($amount) } { @include sink( $amount, $side, $ext ); }
+    .sink-#{ $side }-#{ f($amount) } { @include sink( $amount, $side, $ext ); }
   }
 }
 
@@ -109,11 +109,11 @@
 }
 
 @mixin def-buffer-sides( $key, $amount ) {
-  .#{ $key }-sides-#{ u($amount) } { @extend .#{ $key }-left-#{ u(amount) }; @extend .#{ $key }-right-#{ u(amount) }; }
+  .#{ $key }-sides-#{ f($amount) } { @extend .#{ $key }-left-#{ f(amount) }; @extend .#{ $key }-right-#{ f(amount) }; }
 }
 
 @mixin def-buffer-box( $key, $amount ) {
-  .#{ $key }-box-#{ u($amount) } { @extend .#{ $key }-sides-#{ u(amount) }; @extend .#{ $key }-top-#{ u(amount) }; }
+  .#{ $key }-box-#{ f($amount) } { @extend .#{ $key }-sides-#{ f(amount) }; @extend .#{ $key }-top-#{ f(amount) }; }
 }
 
 /* type **********************************************************************/
@@ -123,7 +123,7 @@
 }
 
 @mixin def-font-weight( $amount:bold, $ext:() ) {
-  .font-weight-#{ u($amount) } { @include font-weight($amount, $ext); }
+  .font-weight-#{ f($amount) } { @include font-weight($amount, $ext); }
 }
 
 @mixin def-font-regular( $ext:() ) {
@@ -135,27 +135,29 @@
 }
 
 @mixin def-font-style( $style, $ext:() ) {
-  .font-style-#{ u($style) } { @include font-style($style, $ext); }
+  .font-style-#{ f($style) } { @include font-style($style, $ext); }
 }
 
 @mixin def-font-italic( $ext:() ) {
-  .font-italic { @include font-italic($ext); }
+  @include def-font-style( italic );
+  .font-italic { @extend .font-style-italic; }
 }
 
 @mixin def-font-oblique( $ext:() ) {
-  .font-oblique { @include font-oblique($ext); }
+  @include def-font-style( oblique );
+  .font-oblique { @extend .font-style-oblique; }
 }
 
 @mixin def-font-size( $size, $ext:() ) {
-  .font-size-#{ u($size) } { @include font-size($size, $ext); }
+  .font-size-#{ f($size) } { @include font-size($size, $ext); }
 }
 
 @mixin def-font-color( $color, $ext:() ) {
-  .font-color-#{ u($color) } { @include font-color($color, $ext); }
+  .font-color-#{ f($color) } { @include font-color($color, $ext); }
 }
 
 @mixin def-text-case( $case, $ext:() ) {
-  .text-case-#{ u($case) } { @include text-case($case, $ext); }
+  .text-case-#{ f($case) } { @include text-case($case, $ext); }
 }
 
 @mixin def-text-uppercase( $ext:() ) {
@@ -171,7 +173,7 @@
 }
 
 @mixin def-text-decoration( $decoration, $ext:() ) {
-  .text-decoration-#{ u($decoration) } { @include text-decoration($decoration, $ext); }
+  .text-decoration-#{ f($decoration) } { @include text-decoration($decoration, $ext); }
 }
 
 @mixin def-text-undecorated( $ext:() ) {

@@ -60,9 +60,13 @@
 
 @for $i from 1 through 24 { /* 3u 7u 11u ... */
   $px: $i * 40px - 10;
+  $col: $i * 1col;
 
   @include def-width( $px );
   @include def-box-width( $px );
+
+  .width-#{ f($col) } { @extend .width-#{ f($px) }; }
+  .box-width-foo { @extend .box-width-#{ f($px) }; }
 }
 
 @include def-box-fill;

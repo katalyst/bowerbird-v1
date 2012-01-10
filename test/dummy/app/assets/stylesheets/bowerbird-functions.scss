@@ -231,7 +231,6 @@
   @return #{ $left }#{ $unit };
 }
 
-/* `u` is an alias for `format-amount` */
+/* `f` is an alias for `format-amount` */
 
-@function u( $amount ) { @return format-amount($amount) }
-
+@function f( $amount ) { @return format-amount($amount); }

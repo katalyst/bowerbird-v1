@@ -18,12 +18,6 @@
 @include def-border-box;
 @include def-content-box;
 
-.container {
-  @extend .clear-fix;
-  @extend .display-block;
-  margin: 0 auto;
-}
-
 /* shape *********************************************************************/
 
 /* width, height and line-height */
@@ -48,7 +42,7 @@
   @include def-line-height( $px );
 }
 
-@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+@for $i from 0 through 80 { /* 0u 0u5 1u ... */
   $px: $i * 5px;
 
   @include def-width( $px );
@@ -109,7 +103,7 @@
   }
 }
 
-@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+@for $i from 0 through 40 { /* 0u 0u5 1u ... */
   $px: $i * 5px;
 
   @each $side in $sides {
@@ -257,13 +251,27 @@ dl li.last-item {margin-left:0;margin-right:0;}
 .spaced-1-list > li, .spaced-l-1-list > li {margin-left:10px;}
 .spaced-1-list > li, .spaced-r-1-list > li {margin-right:10px;}
 
-ol li.last-item,
-ul li.last-item,
-dl li.last-item {margin-left:0;margin-right:0;}
+li.last-item,
+li.last-item,
+li.last-item {margin-left:0;margin-right:0;}
 
-/* Usage: "main width-950px" */
-.main {
+/* columns *******************************************************************/
+
+.column {
   @extend .clear-fix;
   @extend .display-block;
+}
+
+.left.column {
+  @extend .float-left;
+}
+
+.right.column {
+  @extend .float-right;
+}
+
+.container {
+  @extend .column;
   margin: 0 auto;
 }
+

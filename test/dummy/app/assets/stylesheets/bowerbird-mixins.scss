@@ -4,7 +4,7 @@
 /* utilities *****************************************************************/
 
 @mixin clear-fix {
-  :after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
+  &:after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
   display:block;
 }
 
@@ -114,10 +114,8 @@
   }
 }
 
-@mixin float( $sides:left right, $ext:() ) {
-  @each $side in $sides {
-    float:$side $ext;
-  }
+@mixin float( $side, $ext:() ) {
+  float:$side $ext;
 }
 
 @mixin align( $alignment, $ext:() ) {

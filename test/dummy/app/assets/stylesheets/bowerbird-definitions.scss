@@ -105,7 +105,7 @@
 }
 
 @mixin def-float( $side, $ext:() ) {
-  .float-#{ $side } { @include float( $ext ); }
+  .float-#{ $side } { @include float( $side, $ext ); }
 }
 
 @mixin def-align( $alignment, $ext:() ) {

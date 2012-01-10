@@ -74,6 +74,10 @@
 
 /* position ******************************************************************/
 
+@mixin position( $type:relative, $ext:() ) {
+  position:$type;
+}
+
 @mixin pad( $amount, $sides:$sides, $ext:() ) {
   @each $side in $sides {
     padding-#{ $side }:$amount $ext;
@@ -94,13 +98,13 @@
 
 @mixin push( $amount, $directions:$directions, $ext:() ) {
   @each $direction in $directions {
-    #{ side-in-opposite-direction($direction) }:$amount $ext; position:relative;
+    #{ side-in-opposite-direction($direction) }:$amount $ext; @extend .position-relative;
   }
 }
 
 @mixin pull( $amount, $directions:$directions, $ext:() ) {
   @each $direction in $directions {
-    #{ side-in-direction($direction) }:-$amount $ext; position:relative;
+    #{ side-in-direction($direction) }:-$amount $ext; @extend .position-relative;
   }
 }
 
@@ -167,7 +171,7 @@
 }
 
 @mixin text-case( $case, $ext:() ) {
-  text-transform:if( $case == capital, capitalize, $case + case ) $ext;
+  text-transform:if( $case == title, capitalize, $case + case ) $ext;
 }
 
 @mixin text-uppercase( $ext:() ) {

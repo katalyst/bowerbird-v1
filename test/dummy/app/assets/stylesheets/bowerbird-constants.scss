@@ -11,7 +11,7 @@ $horizontal-alignments: join($horizontal-sides, (center));
 $vertical-alignments: join($vertical-sides, (middle));
 $alignments: join($horizontal-alignments, $vertical-alignments);
 
-$cases: upper lower capital;
+$cases: upper lower title;
 
 /* data relations ************************************************************/
 

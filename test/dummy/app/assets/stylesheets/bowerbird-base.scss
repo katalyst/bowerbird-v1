@@ -73,15 +73,18 @@
 
 .height-auto { @include height(auto); }
 .width-auto { @include width(auto); }
-
 .width-full { @include box-width(100%); }
-.width-half { @include box-width(50%); }
-.width-third { @include box-width(33.33%); }
-.width-third-2 { @include box-width(66.66%); }
-.width-quarter { @include box-width(25%); }
-.width-quarter-3 { @include box-width(75%); }
+
+.width-1-quarter { @include box-width(25%); }
+.width-1-third { @include box-width(33.33%); }
+.width-1-half { @include box-width(50%); }
+.width-2-thirds { @include box-width(66.66%); }
+.width-3-quarters { @include box-width(75%); }
 
 /* position ******************************************************************/
+
+@include def-position(relative);
+@include def-position(absolute);
 
 /* pad, space, backspace, push, pull, sink */
 
@@ -134,6 +137,8 @@
 
 @include def-float( left );
 @include def-float( right );
+
+/* align */
 
 @each $alignment in $alignments {
   @include def-align( $alignment );
@@ -230,16 +235,6 @@ dl li.last-item {margin-left:0;margin-right:0;}
 
 /* formatting ****************************************************************/
 
-.align-bottom {vertical-align:bottom;}
-.align-center {text-align:center;}
-.align-left {text-align:left;}
-.align-middle {vertical-align:middle;}
-.align-right {text-align:right;}
-.align-top {vertical-align:top;}
-.text-bold {font-weight:bold;}
-.text-lowercase {text-transform:lowercase;}
-.text-uppercase {text-transform:uppercase;}
-.text-titlecase {text-transform:capitalize;}
 .text-nocase {text-transform:none;}
 .white-space-nowrap {white-space:nowrap;}
 .font-small {font-size:10px;line-height:15px;}

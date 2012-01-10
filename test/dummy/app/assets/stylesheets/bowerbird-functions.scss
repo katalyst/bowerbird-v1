@@ -126,7 +126,7 @@
   @return $result;
 }
 
-@function find-by-nth( $lists, $value, $i:1 ) {
+@function find-by-nth( $lists, $value, $i ) {
   @each $list in $lists {
     @if $value == nth($list, $i) { @return $list; }
   }
@@ -159,8 +159,8 @@
 @function find-value( $possibilities ) {
   @each $possibility in $possibilities {
     @if is-value($possibility) { @return $possibility; }
-    @return "";
   }
+  @return "";
 }
 
 /* numerics ******************************************************************/

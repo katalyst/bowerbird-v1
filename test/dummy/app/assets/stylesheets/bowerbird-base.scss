@@ -1,258 +1,180 @@
+@import "bowerbird-constants";
+@import "bowerbird-functions";
+@import "bowerbird-mixins";
 @import "bowerbird-definitions";
 
-/* UTILS ********************************************************************************** UTILS */
+/* utilities *****************************************************************/
 
-.clear-fix:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
-.clear-fix {display:block;}
-.wrap-fix {overflow:auto;width:100%;}
+@include def-clear-fix;
+@include def-wrap-fix;
+@include def-image-fix;
 
-.clear-both {clear:both;}
-.image-fix {display:block;}
+/* flow **********************************************************************/
 
-.float-left {float:left;}
-.float-right {float:right;}
+@include def-display-block;
+@include def-display-inline;
+@include def-display-inline-block;
 
-.display-block {display:block;}
-.display-inline {display:inline;}
-.display-inline-block {display:-moz-inline-stack;display:inline-block;vertical-align:top;zoom:1;*display:inline;}
+@include def-border-box;
+@include def-content-box;
 
-/* BUILT IN **************************************************************************** BUILT IN */
-
-/* line-height-1em, line-height-1em1, line-height-1em2 ... line-height-1em5 */
-
-@for $i from 0 through 5 {
-  $size: 1em+$i/10;
-  // TODO: Replace `$i` with `u($size)`.
-  .line-height-#{$i} {line-height:$size;}
+.container {
+  @extend .clear-fix;
+  @extend .display-block;
+  margin: 0 auto;
 }
 
-/* width (misc) */
+/* shape *********************************************************************/
 
-.w-auto {width:auto;}
-.w-970px {width:970px;}
+/* width, height and line-height */
 
-/* width-0px, width-1px, width-2px ... width-10px */
+@for $i from 10 through 20 { /* 1em 1em1 1em2 ... */
+  $ex: $i * 0.1ex;
+  $em: $i * 0.1em;
 
-@for $i from 0 through 10 {
-  $size: 1px * $i;
-  .w-#{$size} {width:$size;}
+  @include def-width( $ex );
+  @include def-height( $em );
+  @include def-line-height( $em );
 }
 
-/* width-0px, width-10px, width-20px ... width-100px */
+@for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
+  $px: $i * 1px;
 
-@for $i from 0 through 10 {
-  $size: 10px * $i;
-  .w-#{$size} {width:$size;}
+  @include def-width( $px );
+  @include def-box-width( $px );
+
+  @include def-height( $px );
+  @include def-box-height( $px );
+  @include def-line-height( $px );
 }
 
-/* width-0px, width-100px, width-200px ... width-500px */
+@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+  $px: $i * 5px;
 
-@for $i from 0 through 5 {
-  $size: 100px * $i;
-  .w-#{$size} {width:$size;}
+  @include def-width( $px );
+  @include def-box-width( $px );
+
+  @include def-height( $px );
+  @include def-box-height( $px );
 }
 
-/* width-30px, width-70px, width-110px ... width-950px */
+@for $i from 1 through 24 { /* 3u 7u 11u ... */
+  $px: $i * 40px - 10;
 
-@for $i from 1 through 24 {
-  $size: 40px * $i - 10;
-  .w-#{$size} {width:$size;}
+  @include def-width( $px );
+  @include def-box-width( $px );
 }
 
-/****/
-.w-1-1 {width:100%;}
-.w-3-4 {width:75%;}
-.w-2-3 {width:66.66%;}
-.w-1-2 {width:50%;}
-.w-1-3 {width:33.33%;}
-.w-1-4 {width:25%;}
-textarea.w-1-1, input.w-1-1 {width:92%;}
-textarea.w-1-2, input.w-1-2 {width:46%;}
-textarea.w-1-3, input.w-1-3 {width:31%;}
-textarea.w-1-4, input.w-1-4 {width:23%;}
-/* heights */
-.h-auto {height:auto;}
-.h-half {height:5px;}
-.h-1 {height:10px;}
-.h-2 {height:20px;}
-.h-3 {height:30px;}
-.h-4 {height:40px;}
-.h-5 {height:50px;}
-.h-6 {height:60px;}
-.h-7 {height:70px;}
-.h-8 {height:80px;}
-.h-9 {height:90px;}
-.h-10 {height:100px;}
-.h-20 {height:200px;}
-.h-30 {height:300px;}
-.h-40 {height:400px;}
-.h-50 {height:500px;}
-.h-60 {height:600px;}
-.h-70 {height:700px;}
-.h-80 {height:800px;}
-.h-90 {height:900px;}
-.h-100 {height:1000px;}
-input.h-half, textarea.h-half {height:4px;}
-input.h-1, textarea.h-1 {height:9px;}
-input.h-2, textarea.h-2 {height:18px;}
-input.h-3, textarea.h-3 {height:28px;}
-input.h-4, textarea.h-4 {height:36px;}
-input.h-5, textarea.h-5 {height:46px;}
-input.h-6, textarea.h-6 {height:55px;}
-input.h-7, textarea.h-7 {height:64px;}
-input.h-8, textarea.h-8 {height:73px;}
-input.h-9, textarea.h-9 {height:82px;}
-input.h-10, textarea.h-10 {height:92px;}
-input.h-20, textarea.h-20 {height:184px;}
-input.h-30, textarea.h-30 {height:276px;}
-input.h-40, textarea.h-40 {height:368px;}
-input.h-50, textarea.h-50 {height:460px;}
-input.h-60, textarea.h-60 {height:552px;}
-input.h-70, textarea.h-70 {height:644px;}
-input.h-80, textarea.h-80 {height:736px;}
-input.h-90, textarea.h-90 {height:828px;}
-input.h-100, textarea.h-100 {height:920px;}
+@include def-box-fill;
 
-/* space-0px, space-1px, space-2px .. space-10px */
-/* space-top-0px, space-top-1px, space-top-2px .. space-top-10px */
-/* space-sides-0px, space-sides-1px, space-sides-2px .. space-sides-10px */
-/* space-box-0px, space-box-1px, space-box-2px .. space-box-10px */
+.height-auto { @include height(auto); }
+.width-auto { @include width(auto); }
 
-@for $i from 0 through 10 {
-  $size: 1px * $i;
-  @include def-space(#{$size}, top);
-  @include def-space(#{$size}, right);
-  @include def-space(#{$size}, bottom);
-  @include def-space(#{$size}, left);
-  .space-sides-#{$size} {
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
+.width-full { @include box-width(100%); }
+.width-half { @include box-width(50%); }
+.width-third { @include box-width(33.33%); }
+.width-third-2 { @include box-width(66.66%); }
+.width-quarter { @include box-width(25%); }
+.width-quarter-3 { @include box-width(75%); }
+
+/* position ******************************************************************/
+
+/* pad, space, backspace, push, pull, sink */
+
+@for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
+  $px: $i * 1px;
+
+  @each $side in $sides {
+    @include def-pad( $px, $side );
+    @include def-sink( $px, $side );
+    @include def-space( $px, $side );
+    @include def-backspace( $px, $side );
   }
-  .space-box-#{$size} {
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
-    @extend .space-bottom-#{$size};
+
+  @each $direction in $directions {
+    @include def-push( $px, $direction );
+    @include def-pull( $px, $direction );
   }
-  .space-#{$size} {
-    @extend .space-top-#{$size};
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
-    @extend .space-bottom-#{$size};
+
+  @each $key in pad, space {
+    @include def-buffer-sides( $key, $px );
+    @include def-buffer-box( $key, $px );
   }
 }
 
-/* spacing: 0, 10px, 20px .. 100px */
+@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+  $px: $i * 5px;
 
-@for $i from 0 through 10 {
-  $size: 10px * $i;
-  @include def-space(#{$size}, top);
-  @include def-space(#{$size}, right);
-  @include def-space(#{$size}, bottom);
-  @include def-space(#{$size}, left);
-  .space-sides-#{$size} {
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
+  @each $side in $sides {
+    @include def-pad( $px, $side );
+    @include def-sink( $px, $side );
+    @include def-space( $px, $side );
+    @include def-backspace( $px, $side );
   }
-  .space-box-#{$size} {
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
-    @extend .space-bottom-#{$size};
-  }
-  .space-#{$size} {
-    @extend .space-top-#{$size};
-    @extend .space-left-#{$size};
-    @extend .space-right-#{$size};
-    @extend .space-bottom-#{$size};
+
+  @each $direction in $directions {
+    @include def-push( $px, $direction );
+    @include def-pull( $px, $direction );
   }
 }
 
-/* padding: 0, 1px, 2px ... 10px */
+@for $i from 1 through 24 { /* 4u 8u 12u ... */
+  $px: $i * 40px;
 
-@for $i from 0 through 10 {
-  $size: 1px * $i;
-  @include def-pad(#{$size}, top);
-  @include def-pad(#{$size}, right);
-  @include def-pad(#{$size}, bottom);
-  @include def-pad(#{$size}, left);
-  .pad-sides-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-  }
-  .pad-box-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
-  }
-  .pad-#{$size} {
-    @extend .pad-top-#{$size};
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
+  @each $side in $sides {
+    @include def-pad( $px, $side );
   }
 }
 
-/* padding: 0, 10px, 20px ... 100px */
+/* float */
 
-@for $i from 0 through 10 {
-  $size: 10px * $i;
-  @include def-pad(#{$size}, top);
-  @include def-pad(#{$size}, right);
-  @include def-pad(#{$size}, bottom);
-  @include def-pad(#{$size}, left);
-  .pad-sides-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-  }
-  .pad-box-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
-  }
-  .pad-#{$size} {
-    @extend .pad-top-#{$size};
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
-  }
+@include def-float( left );
+@include def-float( right );
+
+@each $alignment in $alignments {
+  @include def-align( $alignment );
 }
 
-/* padding: 0, 40px, 80px ... 24px */
+/* type **********************************************************************/
 
-@for $i from 0 through 24 {
-  $size: 40px * $i;
-  @include def-pad(#{$size}, top);
-  @include def-pad(#{$size}, right);
-  @include def-pad(#{$size}, bottom);
-  @include def-pad(#{$size}, left);
-  .pad-sides-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-  }
-  .pad-box-#{$size} {
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
-  }
-  .pad-#{$size} {
-    @extend .pad-top-#{$size};
-    @extend .pad-left-#{$size};
-    @extend .pad-right-#{$size};
-    @extend .pad-bottom-#{$size};
-  }
-}
+@include def-font-inherit;
+@include def-font-regular;
+@include def-font-bold;
+@include def-font-italic;
+@include def-font-oblique;
+@include def-text-uppercase;
+@include def-text-lowercase;
+@include def-text-capitalize;
+@include def-text-undecorated;
+@include def-text-underlined;
 
-/* sprites */
+/* lists *********************************************************************/
+
+.unmarked-list {list-style-type:none;margin-right:0;padding-left:0;}
+.floated-l-list > li {float:left;}
+.floated-r-list > li {float:right;}
+.inline-list > li {display:inline;}
+.inline-block-list > li {display:-moz-inline-stack;display:inline-block;vertical-align:top;zoom:1;*display:inline;}
+
+.spaced-1-list > li, .spaced-t-1-list > li {margin-top:10px;}
+.spaced-1-list > li, .spaced-b-1-list > li {margin-bottom:10px;}
+.spaced-1-list > li, .spaced-l-1-list > li {margin-left:10px;}
+.spaced-1-list > li, .spaced-r-1-list > li {margin-right:10px;}
+
+ol li.last-item,
+ul li.last-item,
+dl li.last-item {margin-left:0;margin-right:0;}
+
+/* sprites *******************************************************************/
 
 .sprite {background-position:top left;background-repeat:no-repeat;}
 .sprite-button:hover {background-position:bottom left;}
 
-/* hidden & invisible */
+/* invisible *****************************************************************/
 
-.hidden {display:none;}
-.hidden-text {text-align:left;text-indent:-9999px;}
 .invisible {visibility:hidden;}
 
-/* backgrounds */
+/* backgrounds ***************************************************************/
 
 .bg-alert {background-color:#fcc;}
 .bg-black {background-color:#000;}
@@ -262,7 +184,7 @@ input.h-100, textarea.h-100 {height:920px;}
 .bg-white {background-color:#fff;}
 .bg-no-repeat {background-repeat:no-repeat;}
 
-/* borders */
+/* borders *******************************************************************/
 
 .border-e1, .border-t-e1 {border-top-style:solid;border-top-width:1px;}
 .border-e1, .border-b-e1 {border-bottom-style:solid;border-bottom-width:1px;}
@@ -275,7 +197,7 @@ input.h-100, textarea.h-100 {height:920px;}
 .border-success {border-color:#090;}
 .border-white {border-color:#fff;}
 
-/* colors */
+/* colors ********************************************************************/
 
 .color-alert {color:#900;}
 .color-alert a:focus,
@@ -302,25 +224,7 @@ input.h-100, textarea.h-100 {height:920px;}
 .color-white a:hover {color:#fff;text-decoration:none;}
 .color-white a {color:#fff;text-decoration:underline;}
 
-/* text-shadows */
-
-.ts-e1-black {text-shadow:1px 1px 1px #000;}
-.ts-e1-black-80p {text-shadow:1px 1px 1px #000;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8);}
-.ts-e1-black-50p {text-shadow:1px 1px 1px #000;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5);}
-.ts-e1-black-20p {text-shadow:1px 1px 1px #000;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);}
-.ts-e1-white {text-shadow:1px 1px 1px #fff;}
-.ts-e1-white-80p {text-shadow:1px 1px 1px #fff;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8);}
-.ts-e1-white-50p {text-shadow:1px 1px 1px #fff;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5);}
-.ts-e1-white-20p {text-shadow:1px 1px 1px #fff;text-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);}
-
-/* rounding */
-
-.round-e3, .round-b-e3, .round-l-e3, .round-bl-e3 {border-bottom-left-radius:3px;-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;}
-.round-e3, .round-b-e3, .round-r-e3, .round-br-e3 {border-bottom-right-radius:3px;-moz-border-radius-bottomright:3px;-webkit-border-bottom-right-radius:3px;}
-.round-e3, .round-t-e3, .round-l-e3, .round-tl-e3 {border-top-left-radius:3px;-moz-border-radius-topleft:3px;-webkit-border-top-left-radius:3px;}
-.round-e3, .round-t-e3, .round-r-e3, .round-tr-e3 {border-top-right-radius:3px;-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;}
-
-/* formatting */
+/* formatting ****************************************************************/
 
 .align-bottom {vertical-align:bottom;}
 .align-center {text-align:center;}

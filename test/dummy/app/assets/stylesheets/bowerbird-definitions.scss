@@ -53,11 +53,11 @@
 }
 
 @mixin def-box-width( $amount, $ext:() ) {
-  .box-width-#{ f($amount) } { @include box-width($amount, $ext); }
+  .box-width-#{ f($amount) } { @include width($amount, $ext); @extend .border-box; }
 }
 
 @mixin def-box-height( $amount, $ext:() ) {
-  .box-height-#{ f($amount) } { @include box-height($amount, $ext); }
+  .box-height-#{ f($amount) } { @include height($amount, $ext); @extend .border-box; }
 }
 
 @mixin def-box-fill( $ext:() ) {
@@ -69,6 +69,10 @@
 }
 
 /* position ******************************************************************/
+
+@mixin def-position( $type, $ext:() ) {
+  .position-#{ $type } { @include position($type); }
+}
 
 @mixin def-pad( $amount, $side, $ext:() ) {
   @each $side in $sides {
@@ -101,7 +105,7 @@
 }
 
 @mixin def-float( $side, $ext:() ) {
-  .float-#{ $side } { @include float( $ext ); }
+  .float-#{ $side } { @include float( $side, $ext ); }
 }
 
 @mixin def-align( $alignment, $ext:() ) {

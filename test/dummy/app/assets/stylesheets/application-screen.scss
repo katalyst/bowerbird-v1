@@ -1,0 +1,15 @@
+/*
+ *= require bowerbird-screen
+ *= require_self
+*/
+
+@import "bowerbird-screen";
+
+$orange: #ff551e;
+
+body { @include font-color($orange); }
+
+.container .column {color:black;}
+
+
+.die {color:blue !important;}

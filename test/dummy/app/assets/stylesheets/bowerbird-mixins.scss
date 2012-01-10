@@ -4,7 +4,7 @@
 /* utilities *****************************************************************/
 
 @mixin clear-fix {
-  :after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
+  &:after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
   display:block;
 }
 
@@ -74,6 +74,10 @@
 
 /* position ******************************************************************/
 
+@mixin position( $type:relative, $ext:() ) {
+  position:$type;
+}
+
 @mixin pad( $amount, $sides:$sides, $ext:() ) {
   @each $side in $sides {
     padding-#{ $side }:$amount $ext;
@@ -94,13 +98,13 @@
 
 @mixin push( $amount, $directions:$directions, $ext:() ) {
   @each $direction in $directions {
-    #{ side-in-opposite-direction($direction) }:$amount $ext; position:relative;
+    #{ side-in-opposite-direction($direction) }:$amount $ext; @extend .position-relative;
   }
 }
 
 @mixin pull( $amount, $directions:$directions, $ext:() ) {
   @each $direction in $directions {
-    #{ side-in-direction($direction) }:-$amount $ext; position:relative;
+    #{ side-in-direction($direction) }:-$amount $ext; @extend .position-relative;
   }
 }
 
@@ -110,10 +114,8 @@
   }
 }
 
-@mixin float( $sides:left right, $ext:() ) {
-  @each $side in $sides {
-    float:$side $ext;
-  }
+@mixin float( $side, $ext:() ) {
+  float:$side $ext;
 }
 
 @mixin align( $alignment, $ext:() ) {
@@ -167,7 +169,7 @@
 }
 
 @mixin text-case( $case, $ext:() ) {
-  text-transform:if( $case == capital, capitalize, $case + case ) $ext;
+  text-transform:if( $case == title, capitalize, $case + case ) $ext;
 }
 
 @mixin text-uppercase( $ext:() ) {

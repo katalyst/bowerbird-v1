@@ -1,5 +1,5 @@
 // ## Imports
-//
+
 // - [bowerbird-constants.scss](bowerbird-constants.html)
 // - [bowerbird-functions.scss](bowerbird-functions.html)
 // - [bowerbird-mixins.scss](bowerbird-mixins.html)
@@ -11,7 +11,7 @@
 @import "bowerbird-definitions";
 
 // ## Utilities
-//
+
 // ### Clearing
 //
 // `clear-fix`, `wrap-fix`
@@ -47,7 +47,7 @@
 @include def-image-fix;
 
 // ## Flow
-//
+
 // ### Display Mode
 //
 // `display-block`, `display-inline`, `display-inline-block`
@@ -80,7 +80,7 @@
 }
 
 // ## Width
-//
+
 // ### Relative Size Increments
 //
 // `width-1ex`, `width-1ex1` ... `width-2ex`
@@ -103,7 +103,7 @@
 //
 // `width-0`, `width-0u5` ... `width-10u`
 
-@for $i from 0 through 20 {
+@for $i from 0 through 80 {
   $px: $i * 5px;
   @include def-width( $px );
 }
@@ -134,14 +134,15 @@
 
 .width-auto { @include width(auto); }
 .width-full { @include box-width(100%); }
-.width-half { @include box-width(50%); }
-.width-third { @include box-width(33.33%); }
-.width-third-2 { @include box-width(66.66%); }
-.width-quarter { @include box-width(25%); }
-.width-quarter-3 { @include box-width(75%); }
+
+.width-1-quarter { @include box-width(25%); }
+.width-1-third { @include box-width(33.33%); }
+.width-1-half { @include box-width(50%); }
+.width-2-thirds { @include box-width(66.66%); }
+.width-3-quarters { @include box-width(75%); }
 
 // ## Box Width
-//
+
 // ### Small Increments
 //
 // `box-width-0`, `box-width-0u1` ... `box-width-2u`
@@ -178,7 +179,7 @@
 }
 
 // ## Height
-//
+
 // ### Relative Size Increments
 //
 // `height-1em`, `height-1em1` ... `height-2em`
@@ -217,7 +218,7 @@
 .height-auto { @include height(auto); }
 
 // ## Box Height
-//
+
 // ### Small Increments
 //
 // `box-height-0`, `box-height-0u1` ... `box-height-2u`
@@ -241,7 +242,7 @@
 /* TODO */
 
 // ## Line Height
-//
+
 // ### Relative Size Increments
 //
 // `line-height-1em`, `line-height-1em1` ... `line-height-2em`
@@ -267,7 +268,7 @@
 @include def-box-fill;
 
 // ## Position
-//
+
 // ### Padding
 //
 // All: `pad-0`, `pad-0u1` ... `pad-2u`
@@ -292,6 +293,9 @@
 //
 // Backspace: `box-height-0`, `box-height-0u5` ... `box-height-10u`
 
+@include def-position(relative);
+@include def-position(absolute);
+
 @for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
   $px: $i * 1px;
 
@@ -313,7 +317,7 @@
   }
 }
 
-@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+@for $i from 0 through 40 { /* 0u 0u5 1u ... */
   $px: $i * 5px;
 
   @each $side in $sides {
@@ -341,6 +345,8 @@
 
 @include def-float( left );
 @include def-float( right );
+
+/* align */
 
 @each $alignment in $alignments {
   @include def-align( $alignment );
@@ -437,16 +443,6 @@ dl li.last-item {margin-left:0;margin-right:0;}
 
 /* formatting ****************************************************************/
 
-.align-bottom {vertical-align:bottom;}
-.align-center {text-align:center;}
-.align-left {text-align:left;}
-.align-middle {vertical-align:middle;}
-.align-right {text-align:right;}
-.align-top {vertical-align:top;}
-.text-bold {font-weight:bold;}
-.text-lowercase {text-transform:lowercase;}
-.text-uppercase {text-transform:uppercase;}
-.text-titlecase {text-transform:capitalize;}
 .text-nocase {text-transform:none;}
 .white-space-nowrap {white-space:nowrap;}
 .font-small {font-size:10px;line-height:15px;}
@@ -455,3 +451,16 @@ dl li.last-item {margin-left:0;margin-right:0;}
 /* small? */
 
 .small p, .small address, .small pre, .small table, .small ol, .small ul, .small dl {margin-bottom:5px;}
+
+.column {
+  @extend .clear-fix;
+  @extend .display-block;
+}
+
+.left.column {
+  @extend .float-left;
+}
+
+.right.column {
+  @extend .float-right;
+}

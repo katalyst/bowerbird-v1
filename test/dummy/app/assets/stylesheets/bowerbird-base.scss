@@ -1,22 +1,71 @@
+// ## Imports
+//
+// - [bowerbird-constants.scss](bowerbird-constants.html)
+// - [bowerbird-functions.scss](bowerbird-functions.html)
+// - [bowerbird-mixins.scss](bowerbird-mixins.html)
+// - [bowerbird-definitions.scss](bowerbird-definitions.html)
+
 @import "bowerbird-constants";
 @import "bowerbird-functions";
 @import "bowerbird-mixins";
 @import "bowerbird-definitions";
 
-/* utilities *****************************************************************/
+// ## Utilities
+//
+// ### Clearing
+//
+// `clear-fix`, `wrap-fix`
+//
+// Use `clear-fix` to force a block element to wrap it's content:
+//
+//     <div class="clear-fix" style="background:red;">
+//       <div style="float:left;">Words</div>
+//     </div>
+//
+// Alternatively, use `wrap-fix`:
+//
+//     <div class="wrap-fix" style="background:red;">
+//       <div style="float:left;">Words</div>
+//     </div>
 
 @include def-clear-fix;
 @include def-wrap-fix;
+
+// ### Image Fix
+//
+// `image-fix`
+//
+// Removes space beneath images:
+//
+//     <div style="height:100px;background:red;">
+//       <img class="image-fix" src="example.png" height="100" />
+//     </div>
+//     <div style="height:100px;background:red;">
+//       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+//     </div>
+
 @include def-image-fix;
 
-/* flow **********************************************************************/
+// ## Flow
+//
+// ### Display Mode
+//
+// `display-block`, `display-inline`, `display-inline-block`
 
 @include def-display-block;
 @include def-display-inline;
 @include def-display-inline-block;
 
+// ### Box Model
+//
+// `border-box`, `content-box`
+
 @include def-border-box;
 @include def-content-box;
+
+// ### Grid Container
+//
+// `container`
 
 .container {
   @extend .clear-fix;
@@ -24,11 +73,17 @@
   margin: 0 auto;
 }
 
-/* shape *********************************************************************/
+// ## Width, Height and Line-Height
+//
+// ### 0em1 Increments
+//
+// Width: `width-1em`, `width-1em1` ... `width-2em`
+//
+// Height: `height-1em`, `height-1em1` ... `height-2em`
+//
+// Line height: `line-height-1em`, `line-height-1em1` ... `line-height-2em`
 
-/* width, height and line-height */
-
-@for $i from 10 through 20 { /* 1em 1em1 1em2 ... */
+@for $i from 10 through 20 {
   $ex: $i * 0.1ex;
   $em: $i * 0.1em;
 
@@ -37,7 +92,19 @@
   @include def-line-height( $em );
 }
 
-@for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
+// ### 0u1 (1px) Increments
+//
+// Width: `width-0`, `width-0u1` ... `width-2u`
+//
+// Box width: `box-width-0`, `box-width-0u1` ... `box-width-2u`
+//
+// Height: `height-0`, `height-0u1` ... `height-2u`
+//
+// Box height: `box-height-0`, `box-height-0u1` ... `box-height-2u`
+//
+// Line height: `line-height-0`, `line-height-0u1` ... `line-height-2u`
+
+@for $i from 0 through 20 {
   $px: $i * 1px;
 
   @include def-width( $px );
@@ -48,7 +115,17 @@
   @include def-line-height( $px );
 }
 
-@for $i from 0 through 20 { /* 0u 0u5 1u ... */
+// ### 0u5 (5px) Increments
+//
+// Width: `width-0`, `width-0u5` ... `width-10u`
+//
+// Box width: `box-width-0`, `box-width-0u5` ... `box-width-10u`
+//
+// Height: `height-0`, `height-0u5` ... `height-10u`
+//
+// Box height: `box-height-0`, `box-height-0u5` ... `box-height-10u`
+
+@for $i from 0 through 20 {
   $px: $i * 5px;
 
   @include def-width( $px );
@@ -58,7 +135,17 @@
   @include def-box-height( $px );
 }
 
-@for $i from 1 through 24 { /* 3u 7u 11u ... */
+// ### Column Increments
+//
+// Unit width: `width-0u3`, `width-0u7` ... `width-9u5`
+//
+// Box width: `box-width-0u3`, `box-width-0u7` ... `box-width-9u5`
+//
+// Column width: `width-1col`, `width-2col` ... `width-24col`
+//
+// Column box width: `box-width-1col`, `box-width-2col` ... `box-width-24col`
+
+@for $i from 1 through 24 {
   $px: $i * 40px - 10;
   $col: $i * 1col;
 
@@ -69,10 +156,19 @@
   .box-width-#{ f($col) } { @extend .box-width-#{ f($px) }; }
 }
 
+// ### Misc
+
+// Fill: `box-fill`
+
 @include def-box-fill;
+
+// Auto: `height-auto`, `width-auto`
 
 .height-auto { @include height(auto); }
 .width-auto { @include width(auto); }
+
+// Width fractions: `width-full`, `width-half`, `width-third`, `width-third-2`,
+// `width-quarter`, `width-quarter-3`
 
 .width-full { @include box-width(100%); }
 .width-half { @include box-width(50%); }
@@ -81,9 +177,31 @@
 .width-quarter { @include box-width(25%); }
 .width-quarter-3 { @include box-width(75%); }
 
-/* position ******************************************************************/
-
-/* pad, space, backspace, push, pull, sink */
+// ## Position
+//
+// ### Padding
+//
+// All: `pad-0`, `pad-0u1` ... `pad-2u`
+//
+// Top: `pad-top-0`, `pad-top-0u1` ... `pad-top-2u`
+//
+// Right: `pad-right-0`, `pad-right-0u1` ... `pad-right-2u`
+//
+// Bottom: `pad-bottom-0`, `pad-bottom-0u1` ... `pad-bottom-2u`
+//
+// Left: `pad-left-0`, `pad-left-0u1` ... `pad-left-2u`
+//
+// Sides: `pad-sides-0`, `pad-sides-0u1` ... `pad-sides-2u`
+//
+// Box: `pad-box-0`, `pad-box-0u1` ... `pad-box-2u`
+//
+// ### Sinking
+//
+// Sink: `box-width-0`, `box-width-0u5` ... `box-width-10u`
+//
+// Space: `height-0`, `height-0u5` ... `height-10u`
+//
+// Backspace: `box-height-0`, `box-height-0u5` ... `box-height-10u`
 
 @for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
   $px: $i * 1px;
@@ -139,7 +257,7 @@
   @include def-align( $alignment );
 }
 
-/* type **********************************************************************/
+// ## Type
 
 @include def-font-inherit;
 @include def-font-regular;
@@ -152,7 +270,7 @@
 @include def-text-undecorated;
 @include def-text-underlined;
 
-/* lists *********************************************************************/
+// ## Lists
 
 .unmarked-list {list-style-type:none;margin-right:0;padding-left:0;}
 .floated-l-list > li {float:left;}
@@ -169,7 +287,7 @@ ol li.last-item,
 ul li.last-item,
 dl li.last-item {margin-left:0;margin-right:0;}
 
-/* sprites *******************************************************************/
+// ## Sprites
 
 .sprite {background-position:top left;background-repeat:no-repeat;}
 .sprite-button:hover {background-position:bottom left;}
@@ -248,27 +366,3 @@ dl li.last-item {margin-left:0;margin-right:0;}
 /* small? */
 
 .small p, .small address, .small pre, .small table, .small ol, .small ul, .small dl {margin-bottom:5px;}
-
-/* lists */
-
-.unmarked-list {list-style-type:none;margin-right:0;padding-left:0;}
-.floated-l-list > li {float:left;}
-.floated-r-list > li {float:right;}
-.inline-list > li {display:inline;}
-.inline-block-list > li {display:-moz-inline-stack;display:inline-block;vertical-align:top;zoom:1;*display:inline;}
-
-.spaced-1-list > li, .spaced-t-1-list > li {margin-top:10px;}
-.spaced-1-list > li, .spaced-b-1-list > li {margin-bottom:10px;}
-.spaced-1-list > li, .spaced-l-1-list > li {margin-left:10px;}
-.spaced-1-list > li, .spaced-r-1-list > li {margin-right:10px;}
-
-ol li.last-item,
-ul li.last-item,
-dl li.last-item {margin-left:0;margin-right:0;}
-
-/* Usage: "main width-950px" */
-.main {
-  @extend .clear-fix;
-  @extend .display-block;
-  margin: 0 auto;
-}

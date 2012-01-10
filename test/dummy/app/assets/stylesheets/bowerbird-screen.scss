@@ -1,18 +1,6 @@
-/*
- *= depend_on bowerbird-constants
- *= depend_on bowerbird-functions
- *= depend_on bowerbird-mixins
- *= depend_on bowerbird-definitions
- *= depend_on bowerbird-base
- *= depend_on bowerbird-reset
- *= require_self
-*/
-
+@import "bowerbird-reset";
 @import "bowerbird-constants";
 @import "bowerbird-functions";
 @import "bowerbird-mixins";
 @import "bowerbird-definitions";
 @import "bowerbird-base";
-@import "bowerbird-reset";
-
-/* these are all added here so they get reloaded on refresh, probably not necessary with sprockets... */

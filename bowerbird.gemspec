@@ -7,8 +7,8 @@ require "bowerbird/version"
 Gem::Specification.new do |s|
   s.name        = "bowerbird"
   s.version     = Bowerbird::VERSION
-  s.authors     = ["Haydn Ewers"]
-  s.email       = ["haydn@katalyst.com.au"]
+  s.authors     = ["Haydn Ewers", "Alex Goldsmith"]
+  s.email       = ["haydn@katalyst.com.au", "alex@katalyst.com.au"]
   s.homepage    = "http://github.com/katalyst/bowerbird"
   s.summary     = "TODO: Summary of Bowerbird."
   s.description = "TODO: Description of Bowerbird."
@@ -19,4 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.1.3"
 
   s.add_development_dependency "sqlite3"
+  # Force the redcarpet version as 2.x breaks rocco.
+  s.add_development_dependency "redcarpet", "~> 1.17"
+  s.add_development_dependency "rocco"
 end

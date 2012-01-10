@@ -6,7 +6,19 @@
   .clear-fix { @include clear-fix; }
 }
 
+@mixin def-wrap-fix {
+  .wrap-fix { @include wrap-fix; }
+}
+
+@mixin def-image-fix {
+  .image-fix { @include image-fix; }
+}
+
 /* flow **********************************************************************/
+
+@mixin def-display-hidden( $ext:() ) {
+  .display-hidden { @include display-hidden($ext); }
+}
 
 @mixin def-display-block( $ext:() ) {
   .display-block { @include display-block($ext); }
@@ -50,7 +62,11 @@
   .box-fill { @include box-fill($ext); }
 }
 
-/* positioning ***************************************************************/
+@mixin def-line-height( $amount, $ext:() ) {
+  .line-height-#{ u($amount) } { @include line-height($amount, $ext); }
+}
+
+/* position ******************************************************************/
 
 @mixin def-pad( $amount, $side, $ext:() ) {
   @each $side in $sides {
@@ -78,7 +94,7 @@
   @if is-zero( $amount ) {
     .sink-#{ $side } { @include sink( $amount, $side, $ext ); }
   } else {
-    .sink-#{ $side }-#{ u($amount) } { @include sink( $amount, $direction, $ext ); }
+    .sink-#{ $side }-#{ u($amount) } { @include sink( $amount, $side, $ext ); }
   }
 }
 
@@ -88,6 +104,14 @@
 
 @mixin def-align( $alignment, $ext:() ) {
   .align-#{ $alignment } { @include align( $alignment, $ext ); }
+}
+
+@mixin def-buffer-sides( $key, $amount ) {
+  .#{ $key }-sides-#{ u($amount) } { @extend .#{ $key }-left-#{ u(amount) }; @extend .#{ $key }-right-#{ u(amount) }; }
+}
+
+@mixin def-buffer-box( $key, $amount ) {
+  .#{ $key }-box-#{ u($amount) } { @extend .#{ $key }-sides-#{ u(amount) }; @extend .#{ $key }-top-#{ u(amount) }; }
 }
 
 /* type **********************************************************************/
@@ -154,5 +178,9 @@
 
 @mixin def-text-underlined( $ext:() ) {
   .text-underlined { @include text-underlined($ext); }
+}
+
+@mixin def-text-hidden( $ext:() ) {
+  .text-hidden { @include text-hidden($ext); }
 }
 

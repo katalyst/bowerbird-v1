@@ -4,10 +4,26 @@
 
 @mixin clear-fix {
   :after { content:"\0020"; display:block; height:0; clear:both; visibility:hidden; overflow:hidden; }
-  display:block !important;
+  display:block;
+}
+
+@mixin wrap-fix {
+  overflow:auto; width:100%;
+}
+
+@mixin image-fix {
+  display:block;
 }
 
 /* flow **********************************************************************/
+
+@mixin clear( $side:both ) {
+  clear:both;
+}
+
+@mixin display-hidden( $ext:() ) {
+  display:none $ext;
+}
 
 @mixin display-block( $ext:() ) {
   display:block $ext;
@@ -40,19 +56,22 @@
 }
 
 @mixin box-width( $amount, $ext:() ) {
-  @include border-box( $suffix ); width:$amount $ext;
+  @include border-box( $ext ); width:$amount $ext;
 }
 
 @mixin box-height( $amount, $ext:() ) {
-  @include border-box( $suffix ); height:$amount $ext;
+  @include border-box( $ext ); height:$amount $ext;
 }
 
 @mixin box-fill( $ext:() ) {
-  @include box-width( 100%, $suffix ); @include box-height( 100%, $suffix );
+  @include box-width( 100%, $ext ); @include box-height( 100%, $ext );
 }
 
+@mixin line-height( $amount, $ext:() ) {
+  line-height:$amount, $ext;
+}
 
-/* positioning ***************************************************************/
+/* position ******************************************************************/
 
 @mixin pad( $amount, $sides:$sides, $ext:() ) {
   @each $side in $sides {
@@ -102,6 +121,10 @@
   } else {
     vertical-align:$alignment $ext;
   }
+}
+
+@mixin space-center {
+  margin:0 auto;
 }
 
 /* type **********************************************************************/
@@ -169,4 +192,9 @@
 @mixin text-underline( $ext:() ) {
   @include text-decoration( underline, $ext );
 }
+
+@mixin text-hidden( $ext:() ) {
+  text-align:left; text-indent:-9999px;
+}
+
 

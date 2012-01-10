@@ -80,7 +80,7 @@
 }
 
 @function opposite-direction( $direction ) {
-  @return find-opposite( $opposite-direction, $direction );
+  @return find-opposite( $opposite-directions, $direction );
 }
 
 @function side-in-direction( $direction ) {
@@ -145,7 +145,7 @@
 }
 
 @function find-first-by-second( $pairs, $second ) {
-  @return maybe-first( find-by-first($pairs, $first) );
+  @return maybe-first( find-by-second($pairs, $second) );
 }
 
 @function find-opposite( $pairs, $first-or-second ) {

@@ -18,23 +18,6 @@
 
 /* BUILT IN **************************************************************************** BUILT IN */
 
-/* lists */
-
-.unmarked-list {list-style-type:none;margin-right:0;padding-left:0;}
-.floated-l-list > li {float:left;}
-.floated-r-list > li {float:right;}
-.inline-list > li {display:inline;}
-.inline-block-list > li {display:-moz-inline-stack;display:inline-block;vertical-align:top;zoom:1;*display:inline;}
-
-.spaced-1-list > li, .spaced-t-1-list > li {margin-top:10px;}
-.spaced-1-list > li, .spaced-b-1-list > li {margin-bottom:10px;}
-.spaced-1-list > li, .spaced-l-1-list > li {margin-left:10px;}
-.spaced-1-list > li, .spaced-r-1-list > li {margin-right:10px;}
-
-ol li.last-item,
-ul li.last-item,
-dl li.last-item {margin-left:0;margin-right:0;}
-
 /* line-height-1em, line-height-1em1, line-height-1em2 ... line-height-1em5 */
 
 @for $i from 0 through 5 {
@@ -345,15 +328,35 @@ input.h-100, textarea.h-100 {height:920px;}
 .align-middle {vertical-align:middle;}
 .align-right {text-align:right;}
 .align-top {vertical-align:top;}
-.bold {font-weight:bold;}
-.lowercase {text-transform:lowercase;}
-.titlecase {text-transform:capitalize;}
-.nocase {text-transform:none;}
-.nowrap {white-space:nowrap;}
-.small {font-size:10px;line-height:15px;}
-.small p, .small address, .small pre, .small table, .small ol, .small ul, .small dl {margin-bottom:5px;}
-.uppercase {text-transform:uppercase;}
+.text-bold {font-weight:bold;}
+.text-lowercase {text-transform:lowercase;}
+.text-uppercase {text-transform:uppercase;}
+.text-titlecase {text-transform:capitalize;}
+.text-nocase {text-transform:none;}
+.white-space-nowrap {white-space:nowrap;}
+.font-small {font-size:10px;line-height:15px;}
 
+
+/* small? */
+
+.small p, .small address, .small pre, .small table, .small ol, .small ul, .small dl {margin-bottom:5px;}
+
+/* lists */
+
+.unmarked-list {list-style-type:none;margin-right:0;padding-left:0;}
+.floated-l-list > li {float:left;}
+.floated-r-list > li {float:right;}
+.inline-list > li {display:inline;}
+.inline-block-list > li {display:-moz-inline-stack;display:inline-block;vertical-align:top;zoom:1;*display:inline;}
+
+.spaced-1-list > li, .spaced-t-1-list > li {margin-top:10px;}
+.spaced-1-list > li, .spaced-b-1-list > li {margin-bottom:10px;}
+.spaced-1-list > li, .spaced-l-1-list > li {margin-left:10px;}
+.spaced-1-list > li, .spaced-r-1-list > li {margin-right:10px;}
+
+ol li.last-item,
+ul li.last-item,
+dl li.last-item {margin-left:0;margin-right:0;}
 
 /* Usage: "main width-950px" */
 .main {

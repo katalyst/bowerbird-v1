@@ -13,8 +13,8 @@
 // ## Utilities
 
 // ### Clearing
-//
-// `clear-fix`, `wrap-fix`
+
+// `.clear-fix`, `.wrap-fix`
 //
 // Use `clear-fix` to force a block element to wrap it's content:
 //
@@ -32,8 +32,8 @@
 @include def-wrap-fix;
 
 // ### Image Fix
-//
-// `image-fix`
+
+// `.image-fix`
 //
 // Removes space beneath images:
 //
@@ -49,28 +49,35 @@
 // ## Flow
 
 // ### Display Mode
-//
-// `display-block`, `display-inline`, `display-inline-block`
+
+// `.display-block`, `.display-inline`, `.display-inline-block`
 
 @include def-display-block;
 @include def-display-inline;
 @include def-display-inline-block;
 
 // ### Box Model
-//
-// `border-box`, `content-box`
+
+// `.border-box`, `.content-box`
 
 @include def-border-box;
 @include def-content-box;
 
-// ### Grid Container
+// ### Grid
+
+// `.container`, `.column`, `.left.column`, `.right.column`
 //
-// `container`
-//
-// Wrapper for a grid:
+// Example:
 //
 //     <body>
-//      <div class="container width-95u">...</div>
+//       <div class="container width-24col">
+//         <div class="left column width-12col space-right-0col1">
+//           Lorem ipsum dolor sit amet.
+//         </div>
+//         <div class="left column width-12col space-right-0col1">
+//           Lorem ipsum dolor sit amet.
+//         </div>
+//       </div>
 //     </body>
 
 .container {
@@ -79,11 +86,24 @@
   margin: 0 auto;
 }
 
+.column {
+  @extend .clear-fix;
+  @extend .display-block;
+}
+
+.left.column {
+  @extend .float-left;
+}
+
+.right.column {
+  @extend .float-right;
+}
+
 // ## Width
 
 // ### Relative Size Increments
-//
-// `width-1ex`, `width-1ex1` ... `width-2ex`
+
+// `.width-1ex`, `.width-1ex1` ... `.width-2ex`
 
 @for $i from 10 through 20 {
   $ex: $i * 0.1ex;
@@ -91,8 +111,8 @@
 }
 
 // ### Small Increments
-//
-// `width-0`, `width-0u1` ... `width-2u`
+
+// `.width-0`, `.width-0u1` ... `.width-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
@@ -100,8 +120,8 @@
 }
 
 // ### Medium Increments
-//
-// `width-0`, `width-0u5` ... `width-10u`
+
+// `.width-0`, `.width-0u5` ... `.width-10u`
 
 @for $i from 0 through 80 {
   $px: $i * 5px;
@@ -113,10 +133,10 @@
 /* TODO */
 
 // ### Column Increments
+
+// Units: `.width-0u3`, `.width-0u7` ... `.width-9u5`
 //
-// Units: `width-0u3`, `width-0u7` ... `width-9u5`
-//
-// Columns: `width-1col`, `width-2col` ... `width-24col`
+// Columns: `.width-1col`, `.width-2col` ... `.width-24col`
 
 @for $i from 1 through 24 {
   $px: $i * 40px - 10;
@@ -128,9 +148,9 @@
 }
 
 // ### Misc
-//
-// `width-auto`, `width-full`, `width-half`, `width-third`, `width-third-2`,
-// `width-quarter`, `width-quarter-3`
+
+// `.width-auto`, `.width-full`, `.width-half`, `.width-third`, `.width-third-2`,
+// `.width-quarter`, `.width-quarter-3`
 
 .width-auto { @include width(auto); }
 .width-full { @include box-width(100%); }
@@ -144,8 +164,8 @@
 // ## Box Width
 
 // ### Small Increments
-//
-// `box-width-0`, `box-width-0u1` ... `box-width-2u`
+
+// `.box-width-0`, `.box-width-0u1` ... `.box-width-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
@@ -153,8 +173,8 @@
 }
 
 // ### Medium Increments
-//
-// `box-width-0`, `box-width-0u5` ... `box-width-10u`
+
+// `.box-width-0`, `.box-width-0u5` ... `.box-width-10u`
 
 @for $i from 0 through 20 {
   $px: $i * 5px;
@@ -166,8 +186,8 @@
 /* TODO */
 
 // ### Column Increments
-//
-// `box-width-1col`, `box-width-2col` ... `box-width-24col`
+
+// `.box-width-1col`, `.box-width-2col` ... `.box-width-24col`
 
 @for $i from 1 through 24 {
   $px: $i * 40px - 10;
@@ -181,8 +201,8 @@
 // ## Height
 
 // ### Relative Size Increments
-//
-// `height-1em`, `height-1em1` ... `height-2em`
+
+// `.height-1em`, `.height-1em1` ... `.height-2em`
 
 @for $i from 10 through 20 {
   $em: $i * 0.1em;
@@ -190,8 +210,8 @@
 }
 
 // ### Small Increments
-//
-// `height-0`, `height-0u1` ... `height-2u`
+
+// `.height-0`, `.height-0u1` ... `.height-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
@@ -199,8 +219,8 @@
 }
 
 // ### Medium Increments
-//
-// `height-0`, `height-0u5` ... `height-10u`
+
+// `.height-0`, `.height-0u5` ... `.height-10u`
 
 @for $i from 0 through 20 {
   $px: $i * 5px;
@@ -212,16 +232,16 @@
 /* TODO */
 
 // ### Misc
-//
-// `height-auto`
+
+// `.height-auto`
 
 .height-auto { @include height(auto); }
 
 // ## Box Height
 
 // ### Small Increments
-//
-// `box-height-0`, `box-height-0u1` ... `box-height-2u`
+
+// `.box-height-0`, `.box-height-0u1` ... `.box-height-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
@@ -229,8 +249,8 @@
 }
 
 // ### Medium Increments
-//
-// `box-height-0`, `box-height-0u5` ... `box-height-10u`
+
+// `.box-height-0`, `.box-height-0u5` ... `.box-height-10u`
 
 @for $i from 0 through 20 {
   $px: $i * 5px;
@@ -244,8 +264,8 @@
 // ## Line Height
 
 // ### Relative Size Increments
-//
-// `line-height-1em`, `line-height-1em1` ... `line-height-2em`
+
+// `.line-height-1em`, `.line-height-1em1` ... `.line-height-2em`
 
 @for $i from 10 through 20 {
   $em: $i * 0.1em;
@@ -253,48 +273,147 @@
 }
 
 // ### Small Increments
-//
-// `line-height-0`, `line-height-0u1` ... `line-height-2u`
+
+// `.line-height-0`, `.line-height-0u1` ... `.line-height-2u`
 
 @for $i from 0 through 20 {
   $px: $i * 1px;
   @include def-line-height( $px );
 }
 
-// ### Width and Height
+// ## Width and Height?
 
-// Fill: `box-fill`
+// `.box-fill`
 
 @include def-box-fill;
 
 // ## Position
 
-// ### Padding
-//
-// All: `pad-0`, `pad-0u1` ... `pad-2u`
-//
-// Top: `pad-top-0`, `pad-top-0u1` ... `pad-top-2u`
-//
-// Right: `pad-right-0`, `pad-right-0u1` ... `pad-right-2u`
-//
-// Bottom: `pad-bottom-0`, `pad-bottom-0u1` ... `pad-bottom-2u`
-//
-// Left: `pad-left-0`, `pad-left-0u1` ... `pad-left-2u`
-//
-// Sides: `pad-sides-0`, `pad-sides-0u1` ... `pad-sides-2u`
-//
-// Box: `pad-box-0`, `pad-box-0u1` ... `pad-box-2u`
-//
-// ### Sinking
-//
-// Sink: `box-width-0`, `box-width-0u5` ... `box-width-10u`
-//
-// Space: `height-0`, `height-0u5` ... `height-10u`
-//
-// Backspace: `box-height-0`, `box-height-0u5` ... `box-height-10u`
+// `.position-relative`, `.position-absolute`
 
 @include def-position(relative);
 @include def-position(absolute);
+
+// ## Pad
+
+// ### Small Increments
+
+// #### All
+
+// `.pad-0`, `.pad-0u1`, `.pad-0u2` ... `.pad-2u`
+
+/* TODO */
+
+// #### Box
+
+// `.pad-box-0`, `.pad-box-0u1`, `.pad-box-0u2` ... `.pad-box-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-buffer-box(pad, $px);
+}
+
+// #### Sides
+
+// `.pad-sides-0`, `.pad-sides-0u1`, `.pad-sides-0u2` ... `.pad-sides-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-buffer-sides(pad, $px);
+}
+
+// #### Top
+
+// `.pad-top-0`, `.pad-top-0u1`, `.pad-top-0u2` ... `.pad-top-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-pad($px, top);
+}
+
+// #### Right
+
+// `.pad-right-0`, `.pad-right-0u1`, `.pad-right-0u2` ... `.pad-right-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-pad($px, right);
+}
+
+// #### Bottom
+
+// `.pad-bottom-0`, `.pad-bottom-0u1`, `.pad-bottom-0u2` ... `.pad-bottom-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-pad($px, bottom);
+}
+
+// #### Left
+
+// `.pad-left-0`, `.pad-left-0u1`, `.pad-left-0u2` ... `.pad-left-2u`
+
+@for $i from 0 through 20 {
+  $px: $i * 1px;
+  @include def-pad($px, left);
+}
+
+// ### Medium Increments
+
+// #### All
+
+// `.pad-0`, `.pad-0u1`, `.pad-0u2` ... `.pad-2u`
+
+/* TODO */
+
+@for $i from 0 through 40 {
+  $px: $i * 5px;
+}
+
+// #### Box
+
+// #### Sides
+
+// #### Top
+
+// #### Right
+
+// #### Bottom
+
+// #### Left
+
+// ### Large Increments
+
+// ## Sink
+
+// ## Space
+
+// ## Backspace
+
+
+
+//
+
+//
+// Top: `.pad-top-0`, `.pad-top-0u1` ... `.pad-top-2u`
+//
+// Right: `.pad-right-0`, `.pad-right-0u1` ... `.pad-right-2u`
+//
+// Bottom: `.pad-bottom-0`, `.pad-bottom-0u1` ... `.pad-bottom-2u`
+//
+// Left: `.pad-left-0`, `.pad-left-0u1` ... `.pad-left-2u`
+//
+// Sides: `.pad-sides-0`, `.pad-sides-0u1` ... `.pad-sides-2u`
+//
+// Box: `.pad-box-0`, `.pad-box-0u1` ... `.pad-box-2u`
+//
+// ### Sinking
+//
+// Sink: `.box-width-0`, `.box-width-0u5` ... `.box-width-10u`
+//
+// Space: `.height-0`, `.height-0u5` ... `.height-10u`
+//
+// Backspace: `.box-height-0`, `.box-height-0u5` ... `.box-height-10u`
 
 @for $i from 0 through 20 { /* 0u 0u1 0u2 ... */
   $px: $i * 1px;
@@ -451,16 +570,3 @@ dl li.last-item {margin-left:0;margin-right:0;}
 /* small? */
 
 .small p, .small address, .small pre, .small table, .small ol, .small ul, .small dl {margin-bottom:5px;}
-
-.column {
-  @extend .clear-fix;
-  @extend .display-block;
-}
-
-.left.column {
-  @extend .float-left;
-}
-
-.right.column {
-  @extend .float-right;
-}
